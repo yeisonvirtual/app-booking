@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Header } from '@/components/Header'
+import { UserProvider } from "@/context/UserProvider";
 
 export const metadata: Metadata = {
   title: "Client",
@@ -13,7 +15,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <UserProvider>
+          <Header />
+          {children}
+        </UserProvider>
+        <p className="text-center text-gray-500 text-xs py-[20px]">
+          &copy;2024 Yeison Rojas. All rights reserved.
+        </p>
+      </body>
     </html>
   );
 }
