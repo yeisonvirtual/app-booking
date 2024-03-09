@@ -1,20 +1,24 @@
 "use client"
-
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import Image from "next/image"
 import Garbage from "@/assets/images/garbage.png"
 import Pencil from "@/assets/images/pencil.png"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
 
 const UsersPage = () => {
 
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
 
   const router = useRouter();
 
-  const getTotalPages = (value) => {
+  const checked = (value) => {
+    setPage(value);
+  }
+
+  const getPagination = (value) => {
     let pages = [];
     
     for (let i = 1; i <= value; i++) {
@@ -24,20 +28,26 @@ const UsersPage = () => {
     return pages;
   };
 
-  const checked = (value) => {
-    setPage(value);
-  }
-
   const getUsers = async() => {
-    // http://localhost:8080/api/users?limit=5&page=1
-    const res = await fetch(`http://localhost:8080/api/users?limit=5&page=${page}`,{
-      credentials: 'include'
-    });
 
-    const data = await res.json();
-    console.log(data.users);
-    setUsers(data.users.docs);
-    setTotalPages(data.users.totalPages);
+    try {
+
+      // http://localhost:8080/api/users?limit=5&page=1
+      const res = await fetch(`http://localhost:8080/api/users?limit=5&page=${page}`,{
+        credentials: 'include'
+      });
+
+      const data = await res.json();
+      console.log(data.users);
+      setUsers(data.users.docs);
+      setTotalPages(data.users.totalPages);
+      setIsLoading(false);
+      
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+    
   }
 
   const editUser = (id) => {
@@ -45,7 +55,6 @@ const UsersPage = () => {
   }
 
   const deleteUser = async (id) => {
-    // http://localhost:8080/api/users?limit=5&page=1
     const res = await fetch(`http://localhost:8080/api/users/delete/${id}`,{
       method: 'POST',
       credentials: 'include'
@@ -60,25 +69,35 @@ const UsersPage = () => {
 
   useEffect(() => {
     getUsers();
+    setIsLoading(true);
     console.log(users);
   }, [page]);
 
   return (
 
-    
-    <section className="h-[calc(100vh-56px)] pt-[80px] px-[20px]">
+    <section className="min-h-[calc(100vh-56px)] pt-[80px] px-[20px]">
 
-      <h3 className="text-gray-700 text-xl text-center font-bold pt-[20px] mb-[10px]">Users</h3>
+    <div className="bg-white shadow-md rounded-badge mt-[20px] p-[10px] sm:p-[20px]">
+
+      <h3 className="text-gray-700 text-xl text-center font-bold mb-[10px]">Users</h3>
+
+      {
+        isLoading && (<h1>Loading...</h1>)
+      }
+
+      {
+        !isLoading && users.length===0 && (<h1>Not users found</h1>)
+      }
 
       {
         users.length>0 && (
 
           <>
-            <div className="overflow-x-auto h-96">
-              <table className="table table-xs sm:table-md">
+            <div className="overflow-x-auto h-[330px]">
+              <table className="table table-xs sm:table-md text-center">
                 <thead>
                   <tr>
-                    <th></th> 
+                    <th>ID</th> 
                     <th>Name</th> 
                     <th>Email</th> 
                     <th>Type</th>
@@ -90,7 +109,7 @@ const UsersPage = () => {
                 <tbody>
 
                   {
-                    users.map((user,index)=>(
+                    users.map((user)=>(
                       <tr key={user._id} className="hover">
                         <th>{user._id}</th> 
                         <td>{user.name}</td> 
@@ -115,7 +134,7 @@ const UsersPage = () => {
             {
               totalPages>1 && (
                 <div className="join pt-[10px]">
-                  {getTotalPages(totalPages)}
+                  {getPagination(totalPages)}
                 </div>
               )
             }
@@ -124,6 +143,7 @@ const UsersPage = () => {
 
         )
       }
+      </div>
       
     </section>
   )

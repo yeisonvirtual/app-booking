@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
-import { UpdateForm } from "@/components/UpdateForm"
+import { UpdateUserForm } from "@/components/UpdateUserForm"
 
 const EditUser = ({params}) => {
 
@@ -26,7 +26,7 @@ const EditUser = ({params}) => {
     <section className="h-[calc(100vh-56px)] pt-[80px] px-[20px]">
 
       <div className="flex justify-center mt-[20px]">
-        <UpdateForm userData={userData} />
+        <UpdateUserForm userData={userData} />
       </div>
       
     </section>

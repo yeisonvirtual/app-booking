@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-export const UpdateForm = ({userData}) => {
+export const UpdateUserForm = ({userData}) => {
 
   const { 
     register,
@@ -13,6 +13,10 @@ export const UpdateForm = ({userData}) => {
   } = useForm();
 
   const onSubmit = async(data) =>{
+
+    // convertir string a boolean
+    data.active = data.active === "1";
+
     const res = await fetch(`http://localhost:8080/api/users/update/${userData._id}`,{
       method: 'POST',
       headers: {
@@ -44,17 +48,11 @@ export const UpdateForm = ({userData}) => {
     else setValue("active", "0");
   },[userData]);
 
-  const _onSubmit = (data)=>{
-    data.active = data.active === "1";
-    console.log(data)
-    onSubmit(data);
-  }
-
   const [errorForm, setErrorForm] = useState(null);
   const [success, setSuccess] = useState(null);
 
   return (
-    <form onSubmit={handleSubmit(_onSubmit)} className="w-full min-w-[280px] sm:w-[400px] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4l">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full min-w-[280px] sm:w-[400px] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4l">
         
         <h3 className="text-gray-700 text-xl text-center font-bold mb-[10px]">Update</h3>
         

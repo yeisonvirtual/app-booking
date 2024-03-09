@@ -45,8 +45,6 @@ const LoginPage = () => {
     }
   }
 
-  // h-[calc(100vh-136px)]
-
   return (
 
     <section className="flex flex-col h-[calc(100vh-56px)] items-center justify-center">

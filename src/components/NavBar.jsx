@@ -36,7 +36,7 @@ export const NavBar = () => {
       menu sm:menu-horizontal px-1 bg-neutral
       ${isOpen? '' : 'hidden'}
       fixed top-0 right-0 pt-[80px]
-      h-full w-[200px] items-center
+      h-full w-[240px] items-center
       sm:static sm:w-auto sm:pt-0 sm:flex sm:items-center
       `}>
 
@@ -58,9 +58,14 @@ export const NavBar = () => {
 
         {
           !isLoading && user && (
-            <li className={`${path === "/dashboard" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
-              <Link href='/dashboard'>Dashboard</Link>
-            </li>
+            <>
+              <li className={`${path === "/dashboard" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
+                <Link href='/dashboard'>Dashboard</Link>
+              </li>
+              <li className={`${path === "/booking" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
+                <Link href='/booking'>Booking</Link>
+              </li>
+            </>
           )
         }
 
