@@ -5,11 +5,6 @@ export async function middleware(request) {
 
   const token = request.cookies.get('token');
 
-  // console.log(request.nextUrl.pathname);
-  // console.log(token);
-
-  // if(request.nextUrl.pathname.startsWith('/dashboard'))
-
   if (!token) {
     return NextResponse.redirect(new URL('/auth/login', request.url));
   }
@@ -19,13 +14,15 @@ export async function middleware(request) {
   try {
 
     const { payload } = await jwtVerify(token.value, secret);
+
+    console.log(payload)
     
     if(request.nextUrl.pathname.startsWith('/admin') && payload.type!=="admin") return NextResponse.redirect(new URL('/dashboard', request.url));
     
     return NextResponse.next();
 
   } catch (error) {
-    console.log(error);
+    console.log("Error middleware: ",error);
     return NextResponse.redirect(new URL('/auth/login', request.url));
   }
 
