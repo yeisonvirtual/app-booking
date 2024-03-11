@@ -8,16 +8,16 @@ export const RoomForm = () => {
 
   const { 
     register,
-    handleSubmit,
     setValue,
+    handleSubmit,
     formState: { errors }
   } = useForm();
 
-  //const [rooms, setRooms] = useState([]);
+  const [success, setSuccess] = useState(false);
   const [errorForm, setErrorForm] = useState(null);
   
   const [file, setFile] = useState(null);
-  const [pathImage, setPathImage] = useState("")
+  const [pathImage, setPathImage] = useState("");
 
   const onFileChange = (e) => {
     
@@ -37,7 +37,7 @@ export const RoomForm = () => {
     }
   }
 
-  //const router = useRouter();
+  // const router = useRouter();
 
   const onSubmit = async (data, event) =>{
     
@@ -61,20 +61,33 @@ export const RoomForm = () => {
       body: formData
     });
 
-    console.log(res);
+    //console.log(res);
     const resJSON = await res.json();
+    //console.log(resJSON);
 
-    console.log(resJSON);
+    if (res.status===201) {
+      console.log('Added successfully');
+      setSuccess(true);
+      console.log(resJSON);
+    } else {
+      console.log('Added error');
+      setErrorForm(resJSON)
+    }
 
-    // if (res.status===201) {
-    //   console.log('Login successfully');
-    //   console.log(resJSON);
-    //   setUser(resJSON);
-    //   router.push('/dashboard');
-    // } else {
-    //   console.log('Login error');
-    //   setErrorForm(resJSON)
-    // }
+  }
+
+  const clearForm = () =>{
+
+    setValue("name","");
+    setValue("size","");
+    setValue("sleeps","");
+    setValue("price","");
+    setValue("description","");
+    setValue("image","");
+    setPathImage("");
+    setFile("");
+
+    setSuccess(false);
 
   }
 
@@ -83,7 +96,6 @@ export const RoomForm = () => {
     <section className="flex flex-col items-center justify-center">
 
       <form
-      
       onSubmit={handleSubmit(onSubmit)}
       className="w-full bg-white rounded px-[10px] py-[10px]">
         
@@ -204,12 +216,32 @@ export const RoomForm = () => {
         </div>
 
         <div className="flex items-center justify-between">
-          <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="submit"
-          >
-            Add
-          </button>
+          
+          <div>
+
+            <button
+            disabled={success}
+            className={`${ success ? "bg-gray-600" : "bg-blue-500" } hover:bg-blue-700 text-white font-bold py-2 px-4 mr-[10px] rounded focus:outline-none focus:shadow-outline`}
+            type="submit"
+            >
+              Add
+            </button>
+
+            {
+              success && (
+                <button
+                onClick={clearForm}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                  Clear
+                </button>
+              )
+            }
+
+          </div>
+
+          { success && <span className="text-green-500 text-xs italic">Added successfully</span> }
+          
         </div>
       </form>
 

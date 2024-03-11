@@ -83,6 +83,9 @@ export const NavBar = () => {
                   <li className={`${path === "/admin/rooms" ? "opacity-50" : ""}`}>
                     <Link href="/admin/rooms">Rooms</Link>
                   </li>
+                  <li className={`${path === "/admin/invoices" ? "opacity-50" : ""}`}>
+                    <Link href="/admin/invoices">Invoices</Link>
+                  </li>
                 </ul>
               </details>
             </li>

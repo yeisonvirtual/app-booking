@@ -1,5 +1,4 @@
 "use client"
-
 import { useEffect, useState } from "react"
 import { UserContext } from "./UserContext"
 import { getCookie } from 'cookies-next';
@@ -17,6 +16,11 @@ export const UserProvider = ({ children }) => {
       const token = getCookie('token');
       //console.log(token)
 
+      const res = await fetch("http://localhost:3000/api/env",{
+        credentials: "include",
+      });
+      const data = await res.json();
+
       if (!token) {
         setIsAuthenticated(false);
         setUser(null);
@@ -24,7 +28,7 @@ export const UserProvider = ({ children }) => {
         return;
       }
 
-      const secret = new TextEncoder().encode("secret_key");
+      const secret = new TextEncoder().encode(data.secret);
       
       try {
         const { payload } = await jwtVerify(token, secret);

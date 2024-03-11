@@ -19,12 +19,9 @@ export async function middleware(request) {
   try {
 
     const { payload } = await jwtVerify(token.value, secret);
-    // elimina el id e iat
-    // const { id, iat, ...user } = payload;
-    // console.log(user);
-
+    
     if(request.nextUrl.pathname.startsWith('/admin') && payload.type!=="admin") return NextResponse.redirect(new URL('/dashboard', request.url));
-      
+    
     return NextResponse.next();
 
   } catch (error) {
@@ -36,5 +33,5 @@ export async function middleware(request) {
 
 // Rutas que pasan por el middleware
 export const config = {
-  matcher: ['/dashboard', '/admin/:path*'],
+  matcher: ['/dashboard', '/booking', '/admin/:path*'],
 }

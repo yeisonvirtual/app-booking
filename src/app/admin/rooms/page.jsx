@@ -7,36 +7,19 @@ import Pencil from "@/assets/images/pencil.png"
 
 const RoomPage = () => {
 
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
   const [rooms, setRooms] = useState([]);
-  const [totalPages, setTotalPages] = useState(0);
-
-  const checked = (value) => {
-    setPage(value);
-  }
-
-  const getPagination = (value) => {
-    let pages = [];
-    
-    for (let i = 1; i <= value; i++) {
-      pages.push(<button key={i} onClick={()=> checked(i)} className={`join-item btn ${page==(i) ? "btn-active" : ""}`}>{i}</button>);
-    }
-    
-    return pages;
-  };
-
+  const [isLoading, setIsLoading] = useState(true);
+ 
   const getRooms = async() => {
 
     try {
-      const res = await fetch(`http://localhost:8080/api/rooms?limit=5&page=${page}`,{
+      const res = await fetch(`http://localhost:8080/api/rooms`,{
         credentials: 'include'
       });
 
       const data = await res.json();
       console.log(data.rooms);
-      setRooms(data.rooms.docs);
-      setTotalPages(data.rooms.totalPages);
+      setRooms(data.rooms);
       setIsLoading(false);
       
     } catch (error) {
@@ -58,7 +41,7 @@ const RoomPage = () => {
     getRooms();
     setIsLoading(true);
     console.log(rooms);
-  }, [page]);
+  }, []);
 
 
   return (
@@ -71,7 +54,7 @@ const RoomPage = () => {
 
         <div className="w-full flex justify-end pr-[5px] sm:pr-[20px] pb-[20px]">
           <button className="btn btn-neutral" onClick={()=>document.getElementById('my_modal_5').showModal()}>
-            Add user
+            Add room
           </button>
         </div>
         
@@ -110,9 +93,9 @@ const RoomPage = () => {
             <tbody>
 
               {
-                rooms.map(room=>(
+                !isLoading && rooms.map(room=>(
                   <tr key={room._id} className="hover">
-                    <th>{room._id}</th> 
+                    <th className="">{room._id}</th> 
                     <td>{room.name}</td> 
                     <td>{room.size}</td>
                     <td>{room.price}</td>
@@ -131,10 +114,6 @@ const RoomPage = () => {
             </tbody> 
                 
           </table>
-        </div>
-
-        <div className="join pt-[10px]">
-          {getPagination(4)}
         </div>
 
       </div>
