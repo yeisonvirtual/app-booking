@@ -60,7 +60,7 @@ const BookingRoom = ({params}) => {
   const getRoom = async() => {
 
     try {
-      const res = await fetch(`http://localhost:8080/api/rooms/${params.id}`,{
+      const res = await fetch(`${process.env.API_URL}/api/rooms/${params.id}`,{
         credentials: 'include'
       });
 
@@ -85,7 +85,7 @@ const BookingRoom = ({params}) => {
     data.totalPrice = totalPrice;
     data.dates = dates;
 
-    const res = await fetch("http://localhost:8080/api/invoices/create",{
+    const res = await fetch(`${process.env.API_URL}/api/invoices/create`,{
       method: 'POST',
       headers: {
         "Content-Type": "application/json"

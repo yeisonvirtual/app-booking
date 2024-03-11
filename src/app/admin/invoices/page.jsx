@@ -8,6 +8,7 @@ const InvoicesPage = () => {
   const { 
     register,
     handleSubmit,
+    getValues,
     formState: { errors }
   } = useForm();
 
@@ -35,7 +36,7 @@ const InvoicesPage = () => {
   const getInvoices = async() => {
 
     try {
-      const res = await fetch(`http://localhost:8080/api/invoices?limit=5&page=${page}&status=${status}`,{
+      const res = await fetch(`${process.env.API_URL}/api/invoices?limit=5&page=${page}&status=${getValues().status}`,{
         credentials: 'include'
       });
 
@@ -58,7 +59,7 @@ const InvoicesPage = () => {
 
     try {
 
-      const res = await fetch(`http://localhost:8080/api/invoices/status/${id}/${status}`,{
+      const res = await fetch(`${process.env.API_URL}/api/invoices/status/${id}/${status}`,{
       method: 'POST',
       credentials: 'include'
     });
@@ -78,10 +79,12 @@ const InvoicesPage = () => {
   }
 
   const onSubmit = async(data)=>{
+
+    setPage(1);
     
     try {
 
-      const res = await fetch(`http://localhost:8080/api/invoices?limit=5&page=1&status=${data.status}`,{
+      const res = await fetch(`${process.env.API_URL}/api/invoices?limit=5&page=${page}&status=${data.status}`,{
       credentials: 'include'
     });
     
@@ -89,6 +92,8 @@ const InvoicesPage = () => {
     const resJSON = await res.json();
     console.log(resJSON);
     setInvoices(resJSON.invoices.docs);
+    setTotalPages(resJSON.invoices.totalPages);
+    setPage(1);
     console.log("Search successfully");
       
     } catch (error) {
@@ -193,7 +198,10 @@ const InvoicesPage = () => {
         </div>
 
         <div className="join pt-[10px]">
-          {getPagination(totalPages)}
+          {
+            totalPages>1 && getPagination(totalPages)
+          }
+          
         </div>
 
       </div>

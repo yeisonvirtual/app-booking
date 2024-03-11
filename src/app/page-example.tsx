@@ -8,7 +8,7 @@ const HomePage = () => {
   const [people, setPeople] = useState([]);
 
   const getHome = async ()=>{
-    const res = await fetch("http://localhost:8080/api/home");
+    const res = await fetch(`${process.env.API_URL}/api/home`);
     const data = await res.json();
     console.log(data);
     setMessage(data.message);

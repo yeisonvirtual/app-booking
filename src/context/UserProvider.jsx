@@ -14,13 +14,7 @@ export const UserProvider = ({ children }) => {
     async function checkLogin(){
 
       const token = getCookie('token');
-      //console.log(token)
-
-      const res = await fetch("http://localhost:3000/api/env",{
-        credentials: "include",
-      });
-      const data = await res.json();
-
+      
       if (!token) {
         setIsAuthenticated(false);
         setUser(null);
@@ -28,7 +22,7 @@ export const UserProvider = ({ children }) => {
         return;
       }
 
-      const secret = new TextEncoder().encode(data.secret);
+      const secret = new TextEncoder().encode(process.env.SECRET);
       
       try {
         const { payload } = await jwtVerify(token, secret);

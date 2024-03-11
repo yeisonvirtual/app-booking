@@ -9,7 +9,7 @@ const EditUser = ({params}) => {
   useEffect(() => {
     
     const getUserData = async () =>{
-      const res = await fetch(`http://localhost:8080/api/users/${params.id}`,{
+      const res = await fetch(`${process.env.API_URL}/api/users/${params.id}`,{
         credentials: 'include'
       });
 

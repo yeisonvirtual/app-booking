@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-export const RoomForm = () => {
+export const RoomForm = ({getRooms}) => {
 
   const { 
     register,
@@ -55,7 +55,7 @@ export const RoomForm = () => {
     formData.append('description', data.description);
     formData.append('image', data.image);
 
-    const res = await fetch("http://localhost:8080/api/rooms/add",{
+    const res = await fetch(`${process.env.API_URL}/api/rooms/add`,{
       method: 'POST',
       credentials: "include",
       body: formData
@@ -68,6 +68,7 @@ export const RoomForm = () => {
     if (res.status===201) {
       console.log('Added successfully');
       setSuccess(true);
+      getRooms();
       console.log(resJSON);
     } else {
       console.log('Added error');
@@ -244,7 +245,7 @@ export const RoomForm = () => {
           
         </div>
       </form>
-
+      
     </section>
 
   )

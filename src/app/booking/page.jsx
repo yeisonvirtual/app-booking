@@ -34,7 +34,7 @@ const BookingPage = () => {
   }, []);
 
   return (
-    <section className='pt-[80px] px-[10px]'>
+    <section className='min-h-[calc(100vh-56px)] pt-[80px] px-[10px]'>
 
       <div className="bg-white shadow-md rounded-badge mt-[20px] p-[10px] sm:p-[20px]">
         

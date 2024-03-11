@@ -42,7 +42,7 @@ export const BookingForm = ({rooms, roomSelected}) => {
     }
 
     try {
-      const res = await fetch(`http://localhost:8080/api/bookings/check/${data.dateInit}/${data.dateEnd}`,{
+      const res = await fetch(`${process.env.API_URL}/api/bookings/check/${data.dateInit}/${data.dateEnd}`,{
         credentials: 'include'
       });
 
@@ -91,7 +91,6 @@ export const BookingForm = ({rooms, roomSelected}) => {
             Room
           </label>
           <select
-          
           className={`shadow border ${ errors.room ? 'border-red-500' : '' } w-full rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           {...register("room", {
             required: true
@@ -141,6 +140,7 @@ export const BookingForm = ({rooms, roomSelected}) => {
           <button
           className="w-full sm:w-auto m-[10px] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           onClick={checkAvailability}
+          type="button"
           >
             Check availability
           </button>

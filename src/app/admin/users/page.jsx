@@ -32,8 +32,7 @@ const UsersPage = () => {
 
     try {
 
-      // http://localhost:8080/api/users?limit=5&page=1
-      const res = await fetch(`http://localhost:8080/api/users?limit=5&page=${page}`,{
+      const res = await fetch(`${process.env.API_URL}/api/users?limit=5&page=${page}`,{
         credentials: 'include'
       });
 
@@ -55,7 +54,7 @@ const UsersPage = () => {
   }
 
   const deleteUser = async (id) => {
-    const res = await fetch(`http://localhost:8080/api/users/delete/${id}`,{
+    const res = await fetch(`${process.env.API_URL}/api/users/delete/${id}`,{
       method: 'POST',
       credentials: 'include'
     });

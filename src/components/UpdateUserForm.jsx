@@ -17,7 +17,7 @@ export const UpdateUserForm = ({userData}) => {
     // convertir string a boolean
     data.active = data.active === "1";
 
-    const res = await fetch(`http://localhost:8080/api/users/update/${userData._id}`,{
+    const res = await fetch(`${process.env.API_URL}/api/users/update/${userData._id}`,{
       method: 'POST',
       headers: {
         "Content-Type": "application/json"

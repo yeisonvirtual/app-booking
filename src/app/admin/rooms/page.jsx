@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import { RoomForm } from "@/components/RoomForm"
 import Garbage from "@/assets/images/garbage.png"
-import Pencil from "@/assets/images/pencil.png"
 
 const RoomPage = () => {
 
@@ -13,7 +12,7 @@ const RoomPage = () => {
   const getRooms = async() => {
 
     try {
-      const res = await fetch(`http://localhost:8080/api/rooms`,{
+      const res = await fetch(`${process.env.API_URL}/api/rooms`,{
         credentials: 'include'
       });
 
@@ -29,11 +28,32 @@ const RoomPage = () => {
     
   }
 
-  const editRoom = (id)=>{
-    console.log("edit room: ",id);
-  }
+  const deleteRoom = async(id)=>{
 
-  const deleteRoom = (id)=>{
+    try {
+
+      const res = await fetch(`${process.env.API_URL}/api/rooms/delete/${id}`,{
+        method: 'POST',
+        credentials: 'include'
+      });
+
+      console.log(res)
+
+      const data = await res.json();
+      console.log(data);
+
+      if (res.status===200) {
+        console.log("Deleted successfully");
+        getRooms();
+        console.log(data);
+      } else {
+        console.log("Deleted error");
+        console.log(data);
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
     console.log("delete room: ",id);
   }
 
@@ -42,7 +62,6 @@ const RoomPage = () => {
     setIsLoading(true);
     console.log(rooms);
   }, []);
-
 
   return (
 
@@ -61,19 +80,19 @@ const RoomPage = () => {
         <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle mt-[5px]">
           <div className="modal-box">
 
-            <form method="dialog">
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-            </form>
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          </form>
 
-            {/* <h3 className="font-bold text-lg">Add Room</h3>
-            <p className="py-4">Press ESC key or click the button below to close</p> */}
-            <RoomForm />
+            <RoomForm getRooms={getRooms} setRooms={setRooms} />
+            
+            <form className="flex justify-end" method="dialog">
+              <button className="btn btn-neutral">Close</button>
+            </form>
 
           </div>
 
-          <form method="dialog" className="modal-backdrop">
-            <button>close</button>
-          </form>
+          
 
         </dialog>
 
@@ -104,7 +123,6 @@ const RoomPage = () => {
                       {room.description}
                     </td> 
                     <td>
-                      <button onClick={()=> editRoom(room._id)} className="btn btn-sm btn-info"> <Image src={Pencil} width={15} alt="E" /> </button>
                       <button onClick={()=> deleteRoom(room._id)} className="btn btn-sm btn-error"> <Image src={Garbage} width={15} alt="D"/> </button>
                     </td>
                   </tr>
