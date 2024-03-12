@@ -1,5 +1,5 @@
 "use client"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { deleteCookie } from 'cookies-next';
 import { usePathname, useRouter } from "next/navigation";
 import { UserContext } from "@/context/UserContext";
@@ -9,7 +9,7 @@ import ImgUser from "../assets/images/user-default.png"
 
 export const NavBar = () => {
 
-  const { user, setUser, isLoading } = useContext(UserContext);
+  const { user, setUser, isLoading, isAuthenticated, setIsAuthenticated } = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const path = usePathname();
@@ -23,8 +23,16 @@ export const NavBar = () => {
   const logout = () =>{
     deleteCookie("token");
     setUser(null);
+    setIsAuthenticated(false);
     router.push("/auth/login");
   }
+
+  // useEffect(()=>{
+  //   console.log("isLoading: ",isLoading)
+  //   console.log("isAuthenticated: ",isAuthenticated)
+  //   console.log("user: ",user)
+  //   if(user) console.log("useradmin: ",user.type=="admin")
+  // },[isLoading]);
 
   return (
     <div className="flex-none z-10">
@@ -57,7 +65,7 @@ export const NavBar = () => {
         }
 
         {
-          !isLoading && user && (
+          !isLoading && isAuthenticated && (
             <>
               <li className={`${path === "/dashboard" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
                 <Link href='/dashboard'>Dashboard</Link>
@@ -70,7 +78,7 @@ export const NavBar = () => {
         }
 
         {
-          !isLoading && user && user.type==="admin" && (
+          !isLoading && isAuthenticated && user.type=="admin" && (
             <li className="mb-[10px] sm:m-0">
               <details>
                 <summary className={`${path.startsWith("/admin") ? "opacity-50" : ""}`}>

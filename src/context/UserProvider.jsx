@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { UserContext } from "./UserContext"
-import { getCookie } from 'cookies-next';
+import { getCookie, getCookies } from 'cookies-next';
 import { jwtVerify } from 'jose';
 
 export const UserProvider = ({ children }) => {
@@ -14,6 +14,8 @@ export const UserProvider = ({ children }) => {
     async function checkLogin(){
 
       const token = getCookie('token');
+
+      // console.log('token: ',getCookies());
       
       if (!token) {
         setIsAuthenticated(false);
@@ -28,6 +30,8 @@ export const UserProvider = ({ children }) => {
         const { payload } = await jwtVerify(token, secret);
         //console.log("userData: ",payload);
         const { id, name, email, type } = payload;
+
+        //console.log('payload: ',payload)
 
         if (!payload) {
           setIsAuthenticated(false);
@@ -58,7 +62,7 @@ export const UserProvider = ({ children }) => {
   // },[isLoading]);
 
   return (
-    <UserContext.Provider value={{ user, setUser, isLoading, isAuthenticated }}>
+    <UserContext.Provider value={{ user, setUser, isLoading, setIsLoading, isAuthenticated, setIsAuthenticated }}>
       { children }
     </UserContext.Provider>
   )

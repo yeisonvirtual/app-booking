@@ -15,41 +15,84 @@ const LoginPage = () => {
     formState: { errors }
   } = useForm();
 
-  const { setUser } = useContext(UserContext);
+  const { setUser, setIsLoading, setIsAuthenticated } = useContext(UserContext);
   const [errorForm, setErrorForm] = useState(null);
 
   const router = useRouter();
 
   const onSubmit = async (data) =>{
-    
-    const res = await fetch(`${process.env.API_URL}/api/auth/login`,{
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify(data)
-    });
 
-    const resJSON = await res.json();
+    try {
 
-    console.log(res);
+      setIsLoading(true);
 
-    if (res.status===201) {
-
-      setCookie('token', resJSON.jwt,{
-        maxAge: 1000 * 60 * 60 * 24 * 30
+      const res = await fetch(`${process.env.API_URL}/api/auth/login`,{
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: 'include',
+        body: JSON.stringify(data),
       });
+  
+      //console.log("res: ",res);
+  
+      const resJSON = await res.json();
+  
+      console.log("resJSON: ",resJSON);
+  
+      if (res.status===201) {
+  
+        // setCookie('token', resJSON.token,{
+        //   maxAge: 1000 * 60 * 60 * 24 * 30
+        // });
+  
+        const resCookie = await fetch(`/api/credentials`,{
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            token: resJSON.token
+          })
+        });
+  
+        //console.log("resCookie: ",resCookie);
+  
+        const cookieJSON = await resCookie.json();
+  
+        console.log("cookieJSON: ",cookieJSON);
+  
+        if(resCookie.status===201){
+  
+          console.log('Cookie created successfully');
+  
+          setUser(resJSON.user);
+          setIsAuthenticated(true);
+  
+          router.push('/dashboard');
+  
+        } else {
+          console.log('Error created cookie');
+          setIsAuthenticated(false)
+        }
 
-      console.log('Login successfully');
-      console.log(resJSON);
-      setUser(resJSON);
-      router.push('/dashboard');
+        setIsLoading(false);
+  
+      } else {
+        console.log('Login error');
+        setErrorForm(resJSON)
+        setIsAuthenticated(false);
+      }
+
+      setIsLoading(false);
       
-    } else {
-      console.log('Login error');
-      setErrorForm(resJSON)
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
     }
+
   }
 
   return (

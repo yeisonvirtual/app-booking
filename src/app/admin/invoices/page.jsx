@@ -40,9 +40,9 @@ const InvoicesPage = () => {
         credentials: 'include'
       });
 
-      console.log(res);
+      //console.log(res);
       const data = await res.json();
-      console.log(data.invoices);
+      console.log(data.invoices.docs);
 
       setInvoices(data.invoices.docs);
       setTotalPages(data.invoices.totalPages);
@@ -88,9 +88,10 @@ const InvoicesPage = () => {
       credentials: 'include'
     });
     
-    console.log(res);
+    //console.log(res);
     const resJSON = await res.json();
-    console.log(resJSON);
+    console.log(resJSON.invoices.docs);
+
     setInvoices(resJSON.invoices.docs);
     setTotalPages(resJSON.invoices.totalPages);
     setPage(1);
@@ -132,8 +133,8 @@ const InvoicesPage = () => {
             >
               <option value="">All</option>
               <option value="1">Accepted</option>
-              <option value="2">Pending</option>
-              <option value="3">Rejected</option>
+              <option value="2">Rejected</option>
+              <option value="3">Pending</option>
             </select>
           </div>
 
@@ -170,8 +171,8 @@ const InvoicesPage = () => {
                 invoices.map(invoice=>(
                   <tr key={invoice._id} className="hover">
                     <th className="">{invoice._id}</th> 
-                    <td>{invoice.user.email}</td>
-                    <td>{invoice.room.name}</td>
+                    <td>{`${ !invoice.user ? 'User deleted': invoice.user.email }`}</td>
+                    <td>{`${ !invoice.room ? 'Room deleted': invoice.room.name }`}</td>
                     <td>{new Date(invoice.dateInit).toLocaleDateString()}</td>
                     <td>{new Date(invoice.dateEnd).toLocaleDateString()}</td>
                     <td>{invoice.totalPrice}</td>

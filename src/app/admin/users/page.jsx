@@ -37,8 +37,9 @@ const UsersPage = () => {
       });
 
       const data = await res.json();
-      console.log(data.users);
+      //console.log(data.users);
       setUsers(data.users.docs);
+      console.log(data.users.docs);
       setTotalPages(data.users.totalPages);
       setIsLoading(false);
       
@@ -71,7 +72,6 @@ const UsersPage = () => {
   useEffect(() => {
     getUsers();
     setIsLoading(true);
-    console.log(users);
   }, [page]);
 
   return (
