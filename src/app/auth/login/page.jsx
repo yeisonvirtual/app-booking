@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { setCookie } from 'cookies-next';
 
 const LoginPage = () => {
 
@@ -35,10 +36,16 @@ const LoginPage = () => {
     console.log(res);
 
     if (res.status===201) {
+
+      setCookie('token', resJSON.jwt,{
+        maxAge: 1000 * 60 * 60 * 24 * 30
+      });
+
       console.log('Login successfully');
       console.log(resJSON);
       setUser(resJSON);
       router.push('/dashboard');
+      
     } else {
       console.log('Login error');
       setErrorForm(resJSON)

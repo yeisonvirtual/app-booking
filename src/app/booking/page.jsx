@@ -12,7 +12,7 @@ const BookingPage = () => {
   const getRooms = async() => {
 
     try {
-      const res = await fetch(`http://localhost:8080/api/rooms`,{
+      const res = await fetch(`${process.env.API_URL}/api/rooms`,{
         credentials: 'include'
       });
 
