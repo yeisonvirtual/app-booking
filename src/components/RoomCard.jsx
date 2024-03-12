@@ -12,13 +12,7 @@ export const RoomCard = ({id, img, name, size, sleeps, description, price, setRo
     <div className="card w-full lg:w-[600px] bg-base-100 shadow-xl mx-[10px] my-[20px]">
       
       <figure>
-        <Image
-        src={img}
-        priority={true}
-        width={1024}
-        height={1024}
-        alt="card"
-        />
+        <img src={img.src} alt="img-room" />
       </figure>
 
       <div className="card-body">
