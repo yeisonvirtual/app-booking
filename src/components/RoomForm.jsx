@@ -1,8 +1,8 @@
 "use client"
-
-//import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+
+import { getCookie } from 'cookies-next';
 
 export const RoomForm = ({getRooms}) => {
 
@@ -37,14 +37,11 @@ export const RoomForm = ({getRooms}) => {
     }
   }
 
-  // const router = useRouter();
-
   const onSubmit = async (data, event) =>{
     
     event.preventDefault();
-    console.log("data 1:",data);
-    data.image = file;
     
+    data.image = file;
 
     const formData = new FormData();
 
@@ -57,6 +54,9 @@ export const RoomForm = ({getRooms}) => {
 
     const res = await fetch(`${process.env.API_URL}/api/rooms/add`,{
       method: 'POST',
+      headers: {
+        "Token": `${getCookie("token")}`
+      },
       credentials: "include",
       body: formData
     });

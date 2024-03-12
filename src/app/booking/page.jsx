@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import { RoomCard } from "@/components/RoomCard"
 import { BookingForm } from "@/components/BookingForm"
 
+import { getCookie } from 'cookies-next';
+
 const BookingPage = () => {
 
   const [isLoading, setIsLoading] = useState(true);
@@ -13,6 +15,9 @@ const BookingPage = () => {
 
     try {
       const res = await fetch(`${process.env.API_URL}/api/rooms`,{
+        headers: {
+          "Token": `${getCookie("token")}`
+        },
         credentials: 'include'
       });
 

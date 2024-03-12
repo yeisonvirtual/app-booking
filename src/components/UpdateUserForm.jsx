@@ -1,7 +1,8 @@
 "use client"
-
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+
+import { getCookie } from 'cookies-next';
 
 export const UpdateUserForm = ({userData}) => {
 
@@ -20,7 +21,8 @@ export const UpdateUserForm = ({userData}) => {
     const res = await fetch(`${process.env.API_URL}/api/users/update/${userData._id}`,{
       method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Token": `${getCookie("token")}`
       },
       credentials: 'include',
       body: JSON.stringify(data)

@@ -4,6 +4,8 @@ import Image from "next/image"
 import { RoomForm } from "@/components/RoomForm"
 import Garbage from "@/assets/images/garbage.png"
 
+import { getCookie } from 'cookies-next';
+
 const RoomPage = () => {
 
   const [rooms, setRooms] = useState([]);
@@ -12,8 +14,12 @@ const RoomPage = () => {
   const getRooms = async() => {
 
     try {
+
       const res = await fetch(`${process.env.API_URL}/api/rooms`,{
-        credentials: 'include'
+        headers: {
+          "Token": `${getCookie("token")}`
+        },
+        credentials: 'include',
       });
 
       const data = await res.json();
@@ -34,6 +40,9 @@ const RoomPage = () => {
 
       const res = await fetch(`${process.env.API_URL}/api/rooms/delete/${id}`,{
         method: 'POST',
+        headers: {
+          "Token": `${getCookie("token")}`
+        },
         credentials: 'include'
       });
 

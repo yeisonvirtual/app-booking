@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['picsum.photos', 'localhost'],
+    domains: ['localhost', 'https://api-booking-105b.onrender.com'],
   },
   env: {
     API_URL: 'https://api-booking-105b.onrender.com',

@@ -5,6 +5,8 @@ import Image from "next/image"
 import Garbage from "@/assets/images/garbage.png"
 import Pencil from "@/assets/images/pencil.png"
 
+import { getCookie } from 'cookies-next';
+
 const UsersPage = () => {
 
   const [page, setPage] = useState(1);
@@ -33,6 +35,9 @@ const UsersPage = () => {
     try {
 
       const res = await fetch(`${process.env.API_URL}/api/users?limit=5&page=${page}`,{
+        headers: {
+          "Token": `${getCookie("token")}`
+        },
         credentials: 'include'
       });
 
@@ -57,6 +62,9 @@ const UsersPage = () => {
   const deleteUser = async (id) => {
     const res = await fetch(`${process.env.API_URL}/api/users/delete/${id}`,{
       method: 'POST',
+      headers: {
+        "Token": `${getCookie("token")}`
+      },
       credentials: 'include'
     });
     

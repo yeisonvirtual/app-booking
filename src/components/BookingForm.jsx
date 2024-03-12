@@ -3,6 +3,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
+import { getCookie } from 'cookies-next';
+
 export const BookingForm = ({rooms, roomSelected}) => {
 
   const { 
@@ -43,6 +45,9 @@ export const BookingForm = ({rooms, roomSelected}) => {
 
     try {
       const res = await fetch(`${process.env.API_URL}/api/bookings/check/${data.dateInit}/${data.dateEnd}`,{
+        headers: {
+          "Token": `${getCookie("token")}`
+        },
         credentials: 'include'
       });
 

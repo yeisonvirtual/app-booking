@@ -1,7 +1,8 @@
 "use client"
 import { useEffect, useState } from "react"
-//import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form";
+
+import { getCookie } from 'cookies-next';
 
 const InvoicesPage = () => {
 
@@ -16,8 +17,6 @@ const InvoicesPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [invoices, setInvoices] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
-
-  
 
   const checked = (value) => {
     setPage(value);
@@ -36,7 +35,11 @@ const InvoicesPage = () => {
   const getInvoices = async() => {
 
     try {
+
       const res = await fetch(`${process.env.API_URL}/api/invoices?limit=5&page=${page}&status=${getValues().status}`,{
+        headers: {
+        "Token": `${getCookie("token")}`
+        },
         credentials: 'include'
       });
 
@@ -61,6 +64,9 @@ const InvoicesPage = () => {
 
       const res = await fetch(`${process.env.API_URL}/api/invoices/status/${id}/${status}`,{
       method: 'POST',
+      headers: {
+        "Token": `${getCookie("token")}`
+      },
       credentials: 'include'
     });
     
@@ -85,17 +91,20 @@ const InvoicesPage = () => {
     try {
 
       const res = await fetch(`${process.env.API_URL}/api/invoices?limit=5&page=${page}&status=${data.status}`,{
-      credentials: 'include'
-    });
+        headers: {
+          "Token": `${getCookie("token")}`
+          },
+        credentials: 'include'
+      });
     
-    //console.log(res);
-    const resJSON = await res.json();
-    console.log(resJSON.invoices.docs);
+      //console.log(res);
+      const resJSON = await res.json();
+      console.log(resJSON.invoices.docs);
 
-    setInvoices(resJSON.invoices.docs);
-    setTotalPages(resJSON.invoices.totalPages);
-    setPage(1);
-    console.log("Search successfully");
+      setInvoices(resJSON.invoices.docs);
+      setTotalPages(resJSON.invoices.totalPages);
+      setPage(1);
+      console.log("Search successfully");
       
     } catch (error) {
       console.log("Error search");

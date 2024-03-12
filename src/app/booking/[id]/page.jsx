@@ -5,6 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Image from "next/image"
 import { UserContext } from "@/context/UserContext";
 
+import { getCookie } from 'cookies-next';
+
 const BookingRoom = ({params}) => {
 
   const { 
@@ -61,6 +63,9 @@ const BookingRoom = ({params}) => {
 
     try {
       const res = await fetch(`${process.env.API_URL}/api/rooms/${params.id}`,{
+        headers: {
+          "Token": `${getCookie("token")}`
+        },
         credentials: 'include'
       });
 
@@ -88,7 +93,8 @@ const BookingRoom = ({params}) => {
     const res = await fetch(`${process.env.API_URL}/api/invoices/create`,{
       method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Token": `${getCookie("token")}`
       },
       credentials: 'include',
       body: JSON.stringify(data)
@@ -189,6 +195,7 @@ const BookingRoom = ({params}) => {
                     <div className="w-full mt-[20px] flex items-center justify-between">
                       <button
                       className="bg-blue-500 hover:bg-blue-700 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                      type="button"
                       onClick={()=> router.push("/booking")}
                       >
                         Booking

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { setCookie } from 'cookies-next';
+import { setCookie, getCookie } from 'cookies-next';
 
 const LoginPage = () => {
 
@@ -43,40 +43,47 @@ const LoginPage = () => {
   
       if (res.status===201) {
   
-        // setCookie('token', resJSON.token,{
-        //   maxAge: 1000 * 60 * 60 * 24 * 30
+        setCookie('token', resJSON.token,{
+          maxAge: 1000 * 60 * 60 * 24 * 30
+        });
+
+        setUser(resJSON.user);
+        setIsAuthenticated(true);
+  
+        router.push('/dashboard');
+        
+        // WITH API
+        // const resCookie = await fetch(`/api/credentials`,{
+        //   method: 'POST',
+        //   headers: {
+        //     "Content-Type": "application/json"
+        //   },
+        //   credentials: 'include',
+        //   body: JSON.stringify({
+        //     token: resJSON.token
+        //   })
         // });
   
-        const resCookie = await fetch(`/api/credentials`,{
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json"
-          },
-          credentials: 'include',
-          body: JSON.stringify({
-            token: resJSON.token
-          })
-        });
+        // //console.log("resCookie: ",resCookie);
   
-        //console.log("resCookie: ",resCookie);
+        // const cookieJSON = await resCookie.json();
   
-        const cookieJSON = await resCookie.json();
+        // console.log("cookieJSON: ",cookieJSON);
   
-        console.log("cookieJSON: ",cookieJSON);
+        // if(resCookie.status===201){
   
-        if(resCookie.status===201){
+        //   console.log('Cookie created successfully');
   
-          console.log('Cookie created successfully');
+        //   setUser(resJSON.user);
+        //   setIsAuthenticated(true);
+        //   //console.log("getcookie: ",getCookie('token'));
   
-          setUser(resJSON.user);
-          setIsAuthenticated(true);
+        //   router.push('/dashboard');
   
-          router.push('/dashboard');
-  
-        } else {
-          console.log('Error created cookie');
-          setIsAuthenticated(false)
-        }
+        // } else {
+        //   console.log('Error created cookie');
+        //   setIsAuthenticated(false)
+        // }
 
         setIsLoading(false);
   
