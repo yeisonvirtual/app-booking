@@ -1,5 +1,4 @@
 "use client"
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -13,33 +12,48 @@ const RegisterPage = () => {
     formState: { errors }
   } = useForm();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [errorForm, setErrorForm] = useState(null);
 
   const router = useRouter();
 
   const onSubmit = async (data) =>{
 
-    const res = await fetch(`${process.env.API_URL}/api/auth/register`,{
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: 'include',
-      body: JSON.stringify(data)
-    });
+    try {
 
-    const resJSON = await res.json();
+      setIsLoading(true);
 
-    console.log(res);
+      const res = await fetch(`${process.env.API_URL}/api/auth/register`,{
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: 'include',
+        body: JSON.stringify(data)
+      });
 
-    if (res.status===201) {
-      console.log('Register successfully');
-      console.log(resJSON);
-      router.push('/auth/login');
-    } else {
-      console.log('Register error');
-      setErrorForm(resJSON)
+      const resJSON = await res.json();
+
+      console.log(res);
+
+      if (res.status===201) {
+        console.log('Register successfully');
+        console.log(resJSON);
+        setIsLoading(false);
+        router.push('/auth/login');
+      } else {
+        console.log('Register error');
+        setErrorForm(resJSON);
+        setIsLoading(false);
+      }
+        
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+      setErrorForm(resJSON);
     }
+
+    
   }
 
   return (
@@ -112,7 +126,11 @@ const RegisterPage = () => {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="submit"
           >
-            Register
+            {
+              isLoading
+              ? <span className="loading loading-spinner"></span>
+              : <p>Register</p>
+            }
           </button>
           <Link className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="/auth/login">
             Login

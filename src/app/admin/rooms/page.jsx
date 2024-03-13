@@ -105,7 +105,7 @@ const RoomPage = () => {
 
         </dialog>
 
-        <div className="overflow-x-auto h-[330px]">
+        <div className="overflow-x-auto min-h-[330px]">
           <table className="table table-xs sm:table-md text-center">
             <thead>
               <tr>

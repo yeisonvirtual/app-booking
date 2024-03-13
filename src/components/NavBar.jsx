@@ -49,7 +49,7 @@ export const NavBar = () => {
       `}>
 
         {
-          !isLoading && !user && (
+          !user && (
             <>
               {/* <li className={`${path === "/" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
                 <Link href='/'>Home</Link>
@@ -65,7 +65,7 @@ export const NavBar = () => {
         }
 
         {
-          !isLoading && isAuthenticated && (
+          isAuthenticated && (
             <>
               {/* <li className={`${path === "/dashboard" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
                 <Link href='/dashboard'>Dashboard</Link>
@@ -78,7 +78,7 @@ export const NavBar = () => {
         }
 
         {
-          !isLoading && isAuthenticated && user.type=="admin" && (
+          isAuthenticated && user.type=="admin" && (
             <li className="mb-[10px] sm:m-0">
               <details>
                 <summary className={`${path.startsWith("/admin") ? "opacity-50" : ""}`}>

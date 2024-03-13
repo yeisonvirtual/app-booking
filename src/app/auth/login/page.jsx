@@ -1,11 +1,10 @@
 "use client"
-
 import { UserContext } from "@/context/UserContext";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { setCookie, getCookie } from 'cookies-next';
+import { setCookie } from 'cookies-next';
 
 const LoginPage = () => {
 
@@ -15,7 +14,8 @@ const LoginPage = () => {
     formState: { errors }
   } = useForm();
 
-  const { setUser, setIsLoading, setIsAuthenticated } = useContext(UserContext);
+  const { setUser, setIsAuthenticated } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [errorForm, setErrorForm] = useState(null);
 
   const router = useRouter();
@@ -116,10 +116,15 @@ const LoginPage = () => {
 
         <div className="flex items-center justify-between">
           <button
+          disabled={isLoading}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="submit"
           >
-            Login
+            {
+              isLoading
+              ? <span className="loading loading-spinner"></span>
+              : <p>Login</p>
+            }
           </button>
           <Link className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="/auth/register">
             Register

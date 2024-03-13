@@ -90,24 +90,35 @@ const BookingRoom = ({params}) => {
     data.totalPrice = totalPrice;
     data.dates = dates;
 
-    const res = await fetch(`${process.env.API_URL}/api/invoices/create`,{
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-        "Token": `${getCookie("token")}`
-      },
-      credentials: 'include',
-      body: JSON.stringify(data)
-    });
+    try {
 
-    const resJSON = await res.json();
+      setIsLoading(true);
 
-    if (res.status===201) {
-      setSuccess(resJSON);
-      console.log(resJSON);
-    } else {
-      console.log(resJSON);
-      setErrorBooking(resJSON);
+      const res = await fetch(`${process.env.API_URL}/api/invoices/create`,{
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "Token": `${getCookie("token")}`
+        },
+        credentials: 'include',
+        body: JSON.stringify(data)
+      });
+
+      const resJSON = await res.json();
+
+      if (res.status===201) {
+        setSuccess(resJSON);
+        setIsLoading(false);
+        console.log(resJSON);
+      } else {
+        console.log(resJSON);
+        setErrorBooking(resJSON);
+        setIsLoading(false);
+      }
+      
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
     }
 
   }

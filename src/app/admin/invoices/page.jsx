@@ -90,6 +90,8 @@ const InvoicesPage = () => {
     
     try {
 
+      setIsLoading(true);
+
       const res = await fetch(`${process.env.API_URL}/api/invoices?limit=5&page=${page}&status=${data.status}`,{
         headers: {
           "Token": `${getCookie("token")}`
@@ -104,11 +106,13 @@ const InvoicesPage = () => {
       setInvoices(resJSON.invoices.docs);
       setTotalPages(resJSON.invoices.totalPages);
       setPage(1);
+      setIsLoading(false);
       console.log("Search successfully");
       
     } catch (error) {
       console.log("Error search");
       console.log(error);
+      setIsLoading(false);
     }
 
   }
@@ -152,13 +156,17 @@ const InvoicesPage = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
             >
-              Search
+              {
+              isLoading
+              ? <span className="loading loading-spinner"></span>
+              : <p>Search</p>
+              }
             </button>
           </div>
 
           </form>
 
-        <div className="overflow-x-auto h-[330px]">
+        <div className="overflow-x-auto min-h-[330px]">
           <table className="table table-xs sm:table-md text-center">
             <thead>
               <tr>

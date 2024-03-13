@@ -17,6 +17,7 @@ export const BookingForm = ({rooms, roomSelected}) => {
 
   const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [successForm, setSuccessForm] = useState(null);
   const [errorForm, setErrorForm] = useState(null);
 
@@ -28,8 +29,7 @@ export const BookingForm = ({rooms, roomSelected}) => {
   const checkAvailability = async() =>{
 
     const data = getValues();
-    console.log(data.dateInit)
-    console.log(data.dateEnd)
+    console.log(data)
 
     if (!data.dateInit || !data.dateEnd) {
       setSuccessForm(null);
@@ -44,7 +44,10 @@ export const BookingForm = ({rooms, roomSelected}) => {
     }
 
     try {
-      const res = await fetch(`${process.env.API_URL}/api/bookings/check/${data.dateInit}/${data.dateEnd}`,{
+
+      setIsLoading(true);
+
+      const res = await fetch(`${process.env.API_URL}/api/bookings/check/${data.room}/${data.dateInit}/${data.dateEnd}`,{
         headers: {
           "Token": `${getCookie("token")}`
         },
@@ -58,16 +61,19 @@ export const BookingForm = ({rooms, roomSelected}) => {
       if (res.status===200){ 
         setErrorForm(null);
         setSuccessForm({ message: 'Room availability'});
+        setIsLoading(false);
         return true;
       }
       else{ 
         setSuccessForm(null);
         setErrorForm({ message: 'No availability'});
+        setIsLoading(false);
         return false;
       }
       
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
       return false
     }
 
@@ -147,7 +153,11 @@ export const BookingForm = ({rooms, roomSelected}) => {
           onClick={checkAvailability}
           type="button"
           >
-            Check availability
+            {
+              isLoading
+              ? <span className="loading loading-spinner"></span>
+              : <p>Check availability</p>
+            }
           </button>
 
           {
