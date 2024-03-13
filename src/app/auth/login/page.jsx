@@ -49,7 +49,6 @@ const LoginPage = () => {
 
         setUser(resJSON.user);
         setIsAuthenticated(true);
-        setIsLoading(false);
   
         router.push('/booking');
   

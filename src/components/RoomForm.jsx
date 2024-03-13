@@ -98,7 +98,7 @@ export const RoomForm = ({getRooms}) => {
 
       <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full bg-white dark:bg-slate-800 rounded px-[10px] py-[10px]">
+      className="w-full rounded px-[10px] py-[10px]">
         
         <h3 className="text-slate-900 dark:text-white text-xl text-center font-bold mb-[10px]">Add room</h3>
         
