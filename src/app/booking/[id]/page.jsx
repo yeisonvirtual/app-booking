@@ -22,6 +22,7 @@ const BookingRoom = ({params}) => {
   const searchParams = useSearchParams(); 
 
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadReserve, setIsLoadReserve] = useState(false);
   const [room, setRoom] = useState([]);
 
   const [success, setSuccess] = useState(false);
@@ -92,7 +93,7 @@ const BookingRoom = ({params}) => {
 
     try {
 
-      setIsLoading(true);
+      setIsLoadReserve(true);
 
       const res = await fetch(`${process.env.API_URL}/api/invoices/create`,{
         method: 'POST',
@@ -107,18 +108,18 @@ const BookingRoom = ({params}) => {
       const resJSON = await res.json();
 
       if (res.status===201) {
-        setSuccess(resJSON);
-        setIsLoading(false);
+        setSuccess(resJSON.id);
+        setIsLoadReserve(true);
         console.log(resJSON);
       } else {
         console.log(resJSON);
         setErrorBooking(resJSON);
-        setIsLoading(false);
+        setIsLoadReserve(true);
       }
       
     } catch (error) {
       console.log(error);
-      setIsLoading(false);
+      setIsLoadReserve(true);
     }
 
   }
@@ -196,7 +197,7 @@ const BookingRoom = ({params}) => {
                       Booking successfully
                     </h3>
 
-                    <p><strong>Invoice reference:</strong> {success.id}</p>
+                    <p><strong>Invoice reference:</strong> {success}</p>
                     
                     <div className="w-full mt-[20px] flex items-center justify-between">
                       <button
@@ -218,7 +219,11 @@ const BookingRoom = ({params}) => {
                     className="bg-blue-500 hover:bg-blue-700 w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit"
                     >
-                      Reserve
+                      {
+                        isLoadReserve
+                        ? <span className="loading loading-spinner"></span>
+                        : <p>Reserve</p>
+                      }
                     </button>
                   </div>
                 )

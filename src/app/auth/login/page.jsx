@@ -49,6 +49,7 @@ const LoginPage = () => {
 
         setUser(resJSON.user);
         setIsAuthenticated(true);
+        setIsLoading(false);
   
         router.push('/booking');
   
@@ -56,9 +57,8 @@ const LoginPage = () => {
         console.log('Login error');
         setErrorForm(resJSON)
         setIsAuthenticated(false);
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
       
     } catch (error) {
       console.log(error);

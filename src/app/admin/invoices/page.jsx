@@ -190,11 +190,11 @@ const InvoicesPage = () => {
                     <th className="">{invoice._id}</th> 
                     <td>{`${ !invoice.user ? 'User deleted': invoice.user.email }`}</td>
                     <td>{`${ !invoice.room ? 'Room deleted': invoice.room.name }`}</td>
-                    <td>{new Date(invoice.dateInit).toLocaleDateString()}</td>
-                    <td>{new Date(invoice.dateEnd).toLocaleDateString()}</td>
+                    <td>{`${new Date(invoice.dateInit).getUTCDate()}/${new Date(invoice.dateInit).getUTCMonth() + 1}/${new Date(invoice.dateInit).getUTCFullYear()}`}</td>
+                    <td>{`${new Date(invoice.dateEnd).getUTCDate()}/${new Date(invoice.dateEnd).getUTCMonth() + 1}/${new Date(invoice.dateEnd).getUTCFullYear()}`}</td>
                     <td>{invoice.totalPrice}</td>
                     <td>{invoice.reference}</td>
-                    <td>{new Date(invoice.createdAt).toLocaleDateString()}</td>
+                    <td>{`${new Date(invoice.createdAt).getUTCDate()}/${new Date(invoice.createdAt).getUTCMonth() + 1}/${new Date(invoice.createdAt).getUTCFullYear()}`}</td>
                     <td>
                       {
                         invoice.status===1 && '🟢' ||

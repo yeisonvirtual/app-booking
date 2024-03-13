@@ -24,7 +24,7 @@ export const NavBar = () => {
     deleteCookie("token");
     setUser(null);
     setIsAuthenticated(false);
-    router.push("/auth/login");
+    router.push("/");
   }
 
   // useEffect(()=>{
@@ -51,9 +51,9 @@ export const NavBar = () => {
         {
           !user && (
             <>
-              {/* <li className={`${path === "/" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
+              <li className={`${path === "/" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
                 <Link href='/'>Home</Link>
-              </li> */}
+              </li>
               <li className={`${path === "/auth/login" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
                 <Link href='/auth/login'>Login</Link>
               </li>
