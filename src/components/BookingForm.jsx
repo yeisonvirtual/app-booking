@@ -96,7 +96,7 @@ export const BookingForm = ({rooms, roomSelected}) => {
             Room
           </label>
           <select
-          className={`shadow border ${ errors.room ? 'border-red-500' : '' } w-full rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow border ${ errors.room ? 'border-red-500' : '' } w-full rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           {...register("room", {
             required: true
           },
@@ -105,7 +105,7 @@ export const BookingForm = ({rooms, roomSelected}) => {
             <option value=""></option>
             {
               rooms.map((room,index)=>(
-                <option onClick={()=>setValue("room", room._id)} key={index} value={room._id}>{room.name}</option>
+                <option className="text-slate-900 dark:text-white" onClick={()=>setValue("room", room._id)} key={index} value={room._id}>{room.name}</option>
               ))
             }
           </select>
@@ -117,7 +117,7 @@ export const BookingForm = ({rooms, roomSelected}) => {
             Date init
           </label>
           <input
-          className={`shadow appearance-none border ${ errors.dateInit ? 'border-red-500' : '' } w-full rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow appearance-none border ${ errors.dateInit ? 'border-red-500' : '' } w-full rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="date"
           {...register("dateInit",{
             required: true
@@ -131,7 +131,7 @@ export const BookingForm = ({rooms, roomSelected}) => {
             Date end
           </label>
           <input
-          className={`shadow appearance-none border ${ errors.dateEnd ? 'border-red-500' : '' } w-full rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow appearance-none border ${ errors.dateEnd ? 'border-red-500' : '' } w-full rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="date"
           {...register("dateEnd",{
             required: true

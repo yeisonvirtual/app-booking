@@ -47,7 +47,7 @@ const BookingPage = () => {
           Booking
         </h3>
 
-        <p className="text-gray-700  text-center font-bold pt-[20px] mb-[10px]">Reserve your room</p>
+        <p className="text-gray-700 text-center font-bold pt-[20px] mb-[10px]">Reserve your room</p>
 
         <BookingForm rooms={rooms} roomSelected={roomSelected} />
 

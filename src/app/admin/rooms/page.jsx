@@ -86,7 +86,7 @@ const RoomPage = () => {
           </button>
         </div>
         
-        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle mt-[5px]">
+        <dialog id="my_modal_5" className="bg-white modal modal-bottom sm:modal-middle mt-[5px]">
           <div className="modal-box">
 
           <form method="dialog">

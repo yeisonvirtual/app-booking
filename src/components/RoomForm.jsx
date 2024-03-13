@@ -109,7 +109,7 @@ export const RoomForm = ({getRooms}) => {
             Name
           </label>
           <input
-          className={`shadow appearance-none border ${ errors.name ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow border ${ errors.name ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="text"
           placeholder="Name"
           {...register("name", {
@@ -127,7 +127,7 @@ export const RoomForm = ({getRooms}) => {
             Size
           </label>
           <input
-          className={`shadow appearance-none border ${ errors.size ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow border ${ errors.size ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="number"
           placeholder="Size"
           {...register("size", {
@@ -146,7 +146,7 @@ export const RoomForm = ({getRooms}) => {
             Sleeps
           </label>
           <input
-          className={`shadow appearance-none border ${ errors.sleeps ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow border ${ errors.sleeps ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="number"
           placeholder="Sleeps"
           {...register("sleeps", {
@@ -164,7 +164,7 @@ export const RoomForm = ({getRooms}) => {
             P/D
           </label>
           <input
-          className={`shadow appearance-none border ${ errors.price ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow border ${ errors.price ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="number"
           placeholder="Price"
           {...register("price", {
@@ -183,7 +183,7 @@ export const RoomForm = ({getRooms}) => {
           </label>
           <textarea
           rows="10"
-          className={`shadow appearance-none border ${ errors.description ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow border ${ errors.description ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           placeholder="Description"
           {...register("description", {
             required: {

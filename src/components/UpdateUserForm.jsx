@@ -66,7 +66,7 @@ export const UpdateUserForm = ({userData}) => {
             Name
           </label>
           <input
-          className={`shadow appearance-none border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow appearance-none border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="text"
           placeholder="Name"
           {...register("name",{
@@ -81,7 +81,7 @@ export const UpdateUserForm = ({userData}) => {
             Email
           </label>
           <input
-          className={`shadow appearance-none border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="email"
           placeholder="Email"
           
@@ -98,7 +98,7 @@ export const UpdateUserForm = ({userData}) => {
             Type
           </label>
           <select
-          className={`shadow border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           {...register("type")}
           >
             <option value="admin">Admin</option>
@@ -111,7 +111,7 @@ export const UpdateUserForm = ({userData}) => {
             Active
           </label>
           <select
-          className={`shadow border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           {...register("active")}
           >
             <option value="1">Active</option>

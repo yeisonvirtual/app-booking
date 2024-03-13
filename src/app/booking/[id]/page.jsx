@@ -121,7 +121,7 @@ const BookingRoom = ({params}) => {
 
       <div className="flex justify-center">
 
-        <div className="w-[600px] bg-white shadow-md rounded-badge mt-[20px] p-[20px] sm:p-[20px]">
+        <div className="max-w-[600px] bg-white shadow-md rounded-badge mt-[20px] p-[20px] sm:p-[20px]">
           
           <h3 className="text-gray-700 text-xl text-center font-bold pt-[20px] mb-[10px]">
             Booking
@@ -129,13 +129,8 @@ const BookingRoom = ({params}) => {
           
           {
             !isLoading && room && (
-              <div className="border mb-[10px]">
-                <Image
-                src={room.image}
-                width={600}
-                height={600}
-                priority={true}
-                alt="room-img"/>
+              <div className="mb-[10px]">
+                <img className="w-full" src={room.image} alt="img-room" />
               </div>
             )
           }
@@ -169,7 +164,7 @@ const BookingRoom = ({params}) => {
                 </label>
                 
                 <input
-                className={`shadow appearance-none border ${ errors.reference ? 'border-red-500' : '' } w-full rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+                className={`text-slate-900 dark:text-white shadow appearance-none border ${ errors.reference ? 'border-red-500' : '' } w-full rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
                 type="text"
                 disabled={success}
                 placeholder="Reference"

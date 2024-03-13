@@ -57,7 +57,7 @@ const RegisterPage = () => {
             Name
           </label>
           <input
-          className={`shadow appearance-none border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow appearance-none border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="text"
           placeholder="Name"
           {...register("name", {
@@ -75,7 +75,7 @@ const RegisterPage = () => {
             Email
           </label>
           <input
-          className={`shadow appearance-none border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow appearance-none border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="email"
           placeholder="Email"
           {...register("email", {
@@ -94,7 +94,7 @@ const RegisterPage = () => {
             Password
           </label>
           <input
-          className={`shadow appearance-none border ${ errors.password ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow appearance-none border ${ errors.password ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="password"
           placeholder="******************"
           {...register("password", {

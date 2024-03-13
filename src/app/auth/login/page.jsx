@@ -106,7 +106,7 @@ const LoginPage = () => {
 
     <section className="flex flex-col h-[calc(100vh-56px)] items-center justify-center">
 
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full min-w-[280px] sm:w-[400px] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4l">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full min-w-[280px] sm:w-[400px] bg-white dark:bg-slate-800 shadow-md rounded px-8 pt-6 pb-8 mb-4l">
         
         <h3 className="text-gray-700 text-xl text-center font-bold mb-[10px]">Login</h3>
         
@@ -117,7 +117,7 @@ const LoginPage = () => {
             Email
           </label>
           <input
-          className={`shadow appearance-none border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow appearance-none border ${ errors.email ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="email"
           placeholder="Email"
           {...register("email", {
@@ -132,11 +132,11 @@ const LoginPage = () => {
         </div>
 
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-gray-700 dark:text-white text-sm font-bold mb-2">
             Password
           </label>
           <input
-          className={`shadow appearance-none border ${ errors.password ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+          className={`text-slate-900 dark:text-white shadow appearance-none border ${ errors.password ? 'border-red-500' : '' } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
           type="password"
           placeholder="******************"
           {...register("password", {
