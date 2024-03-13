@@ -49,43 +49,9 @@ const LoginPage = () => {
 
         setUser(resJSON.user);
         setIsAuthenticated(true);
-  
-        router.push('/dashboard');
-        
-        // WITH API
-        // const resCookie = await fetch(`/api/credentials`,{
-        //   method: 'POST',
-        //   headers: {
-        //     "Content-Type": "application/json"
-        //   },
-        //   credentials: 'include',
-        //   body: JSON.stringify({
-        //     token: resJSON.token
-        //   })
-        // });
-  
-        // //console.log("resCookie: ",resCookie);
-  
-        // const cookieJSON = await resCookie.json();
-  
-        // console.log("cookieJSON: ",cookieJSON);
-  
-        // if(resCookie.status===201){
-  
-        //   console.log('Cookie created successfully');
-  
-        //   setUser(resJSON.user);
-        //   setIsAuthenticated(true);
-        //   //console.log("getcookie: ",getCookie('token'));
-  
-        //   router.push('/dashboard');
-  
-        // } else {
-        //   console.log('Error created cookie');
-        //   setIsAuthenticated(false)
-        // }
-
         setIsLoading(false);
+  
+        router.push('/booking');
   
       } else {
         console.log('Login error');
@@ -106,7 +72,7 @@ const LoginPage = () => {
 
     <section className="flex flex-col h-[calc(100vh-56px)] items-center justify-center">
 
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full min-w-[280px] sm:w-[400px] bg-white dark:bg-slate-800 shadow-md rounded px-8 pt-6 pb-8 mb-4l">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full min-w-[280px] sm:w-[400px] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4l">
         
         <h3 className="text-gray-700 text-xl text-center font-bold mb-[10px]">Login</h3>
         

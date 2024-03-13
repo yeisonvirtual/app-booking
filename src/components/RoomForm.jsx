@@ -98,14 +98,14 @@ export const RoomForm = ({getRooms}) => {
 
       <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full bg-white rounded px-[10px] py-[10px]">
+      className="w-full bg-white dark:bg-slate-800 rounded px-[10px] py-[10px]">
         
-        <h3 className="text-gray-700 text-xl text-center font-bold mb-[10px]">Add room</h3>
+        <h3 className="text-slate-900 dark:text-white text-xl text-center font-bold mb-[10px]">Add room</h3>
         
         {errorForm && <span className="text-red-500 text-xs italic">{errorForm.message}</span>}
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="text-slate-900 dark:text-white block text-sm font-bold mb-2">
             Name
           </label>
           <input
@@ -123,7 +123,7 @@ export const RoomForm = ({getRooms}) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="text-slate-900 dark:text-white block text-sm font-bold mb-2">
             Size
           </label>
           <input
@@ -142,7 +142,7 @@ export const RoomForm = ({getRooms}) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="text-slate-900 dark:text-white block text-sm font-bold mb-2">
             Sleeps
           </label>
           <input
@@ -160,7 +160,7 @@ export const RoomForm = ({getRooms}) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="text-slate-900 dark:text-white block text-sm font-bold mb-2">
             P/D
           </label>
           <input
@@ -178,7 +178,7 @@ export const RoomForm = ({getRooms}) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="text-slate-900 dark:text-white block text-sm font-bold mb-2">
             Description
           </label>
           <textarea
@@ -196,7 +196,7 @@ export const RoomForm = ({getRooms}) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="text-slate-900 dark:text-white block text-sm font-bold mb-2">
             Image
           </label>
           <input

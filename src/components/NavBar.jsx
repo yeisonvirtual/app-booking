@@ -51,9 +51,9 @@ export const NavBar = () => {
         {
           !isLoading && !user && (
             <>
-              <li className={`${path === "/" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
+              {/* <li className={`${path === "/" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
                 <Link href='/'>Home</Link>
-              </li>
+              </li> */}
               <li className={`${path === "/auth/login" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
                 <Link href='/auth/login'>Login</Link>
               </li>
@@ -67,9 +67,9 @@ export const NavBar = () => {
         {
           !isLoading && isAuthenticated && (
             <>
-              <li className={`${path === "/dashboard" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
+              {/* <li className={`${path === "/dashboard" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
                 <Link href='/dashboard'>Dashboard</Link>
-              </li>
+              </li> */}
               <li className={`${path === "/booking" ? "opacity-50" : ""} mb-[10px] sm:m-0`}>
                 <Link href='/booking'>Booking</Link>
               </li>
