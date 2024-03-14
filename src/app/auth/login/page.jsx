@@ -50,7 +50,8 @@ const LoginPage = () => {
         setUser(resJSON.user);
         setIsAuthenticated(true);
         setIsLoading(false);
-  
+        
+        router.refresh();
         router.push('/booking');
   
       } else {
@@ -71,7 +72,7 @@ const LoginPage = () => {
 
     <section className="flex flex-col h-[calc(100vh-56px)] items-center justify-center">
 
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full min-w-[280px] sm:w-[400px] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4l">
+      <form onSubmit={handleSubmit(onSubmit)} className="animate-slidein w-full min-w-[280px] sm:w-[400px] bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4l">
         
         <h3 className="text-gray-700 text-xl text-center font-bold mb-[10px]">Login</h3>
         

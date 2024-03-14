@@ -127,7 +127,7 @@ export const NavBar = () => {
                     <span className="badge">User</span>
                   </p>
                 </li>
-                <li><Link onClick={logout} href="/auth/login">Logout</Link></li>
+                <li><Link onClick={logout} href="/">Logout</Link></li>
               </ul>
             </div>
           )

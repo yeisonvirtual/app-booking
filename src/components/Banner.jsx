@@ -7,7 +7,7 @@ export const Banner = ({bgImg, title='title', text='text', bVisible=false, bText
       >
         <div className="w-full h-[640px] lg:h-[480px]" style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}>
           <div className="flex h-full items-center justify-center">
-            <div className="text-white mx-[20px] lg:mx-[200px]">
+            <div className="animate-slidein text-white mx-[20px] lg:mx-[200px]">
               <h1 className="mb-4 text-[25px] sm:text-[50px] uppercase">{ title }</h1>
               <p className="mb-6 text-[15px] sm:text-[30px]">{ text }</p>
               <a
